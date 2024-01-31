@@ -1,0 +1,313 @@
+@font-face {
+    font-family: PermanentMarker;
+    src: url(../public/fonts/PermanentMarker-Regular.ttf);
+    font-weight: 500;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --transition: 0.25s;
+    --bg-color: #0053d08a;
+    --sec-color: #e1e119;
+}
+
+.App {
+    text-align: center;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #282c34;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.popup {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background-color: #0000009f;
+    user-select: none;
+}
+
+.popup > span {
+    width: 400px;
+    height: 260px;
+    background-color: #377492d9;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #373737;
+}
+
+.popup > span > div {
+    font-size: 25px !important;
+    font-weight: 800;
+    color: #f9f9f9;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 450px) {
+    .popup > span {
+        width: 360px;
+    }
+}
+
+.btns-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.btns-group button {
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+
+header {
+    background: var(--bg-color);
+    padding: 5px;
+    text-align: center;
+    width: 99%;
+    border-bottom: 2px solid var(--sec-color);
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+.score-board {
+    width: 585px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 75px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    font-size: 20px;
+    border-bottom: 2px solid var(--sec-color);
+    padding: 8px;
+}
+
+.game-body {
+    height: 100%;
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.x-score,
+.o-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+
+.x-score > span,
+.o-score > span {
+    background-color: #006eff;
+    width: 30px;
+    border-radius: 3px;
+    aspect-ratio: 1 /1;
+    font-weight: 900;
+    border-bottom: 2px solid var(--sec-color);
+    color: yellow;
+}
+
+.container {
+    position: relative;
+    height: 530px;
+    background: #0052d0;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: grid !important;
+    align-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 10px;
+    padding: 35px !important;
+    user-select: none;
+    border-bottom: 4px solid var(--sec-color);
+}
+
+.container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background: #003b93;
+    font-size: 70px !important;
+    cursor: pointer;
+    transition: var(--transition) ease-in-out;
+    border-radius: 4px;
+    border-bottom: 4px solid transparent;
+    font-family: PermanentMarker;
+}
+
+.container > div:hover {
+    transform: scale(1.05);
+    border-color: var(--sec-color);
+    color: yellow;
+}
+
+.win-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 115%;
+    max-width: 550px;
+    height: 10px !important;
+    border-radius: 10px;
+    background-color: lime;
+    z-index: 99;
+    transition: var(--transition) ease-in-out;
+}
+
+.win-line.none {
+    width: 0;
+}
+
+.win-line.row0 {
+    width: 85%;
+    top: 18.5%;
+    transform: translate(-50%, 0);
+}
+
+.win-line.row1 {
+    width: 85%;
+    transform: translate(-50%, -50%);
+}
+
+.win-line.row2 {
+    top: 81%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+}
+
+.win-line.col0 {
+    width: 85%;
+    left: 19%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.win-line.col1 {
+    width: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.win-line.col2 {
+    width: 85%;
+    left: 80.5%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.win-line.mainD {
+    width: 115%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.win-line.secD {
+    width: 115%;
+    transform: translate(-50%, -50%) rotate(135deg);
+}
+
+@media (max-width: 1400px) {
+    .score-board {
+        width: 500px !important;
+    }
+
+    .x-score,
+    .o-score {
+        gap: 10px;
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    .container {
+        height: 500px;
+        width: 500px !important;
+        margin: 10px auto;
+        border-radius: 10px;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)) !important;
+        gap: 10px;
+        padding: 25px;
+    }
+
+    .container > div {
+        height: 140px;
+    }
+}
+
+@media (max-width: 525px) {
+    .score-board {
+        width: 345px !important;
+        height: 60px;
+    }
+
+    .x-score,
+    .o-score {
+        gap: 10px;
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    .container {
+        height: 365px;
+        width: 365px !important;
+        margin: 10px auto;
+        border-radius: 10px;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)) !important;
+        gap: 10px;
+        padding: 15px !important;
+    }
+
+    .container > div {
+        height: 100px;
+        font-size: 55px;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
